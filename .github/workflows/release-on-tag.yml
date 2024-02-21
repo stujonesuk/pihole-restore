@@ -32,7 +32,7 @@ jobs:
   build-armv8:
     needs:
       - test
-    runs-on: ubuntu-latest
+    runs-on: debian-latest
     steps:
       - uses: actions/checkout@v3
 
@@ -50,7 +50,7 @@ jobs:
           # uid = 1001, gid = 115 in github runners
           sudo chown 1001:115 target
           mkdir -p outputs
-          cp ./target/armv8-unknown-linux-gnueabihf/release/${{ env.BINARY_NAME }} ./outputs/${{ env.BINARY_NAME }}-${TAG_NAME}-linux-armv8
+          cp ./target/aarch64-unknown-linux-gnu/release/${{ env.BINARY_NAME }} ./outputs/${{ env.BINARY_NAME }}-${TAG_NAME}-linux-armv8
 
       - name: Upload build artefact
         uses: actions/upload-artifact@v3
