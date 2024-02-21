@@ -1,5 +1,5 @@
 use flate2::read::GzDecoder;
-use log::{debug, warn, info};
+use log::{debug, warn};
 use rusqlite::{named_params, params, Connection};
 use serde::Deserialize;
 use std::error::Error;
@@ -31,7 +31,7 @@ pub fn restore_domainlist(
 
     let mut s = String::new();
     file.read_to_string(&mut s).unwrap();
-    info!("File content: {}", &s);
+    
     let records: Vec<Domain> = serde_json::from_str(&s).unwrap();
     let record_list: DomainList = DomainList {
         list: records,
@@ -168,8 +168,9 @@ struct Domain {
     pub domain: String,
     pub enabled: i32,
     pub date_added: i64,
-    pub comment: String,
+    pub comment: Option<String>,
 }
+[{"id":9,"type":2,"domain":"(\\.|^)split\\.io$","enabled":1,"date_added":1707129864,"date_modified":1707129864,"comment":null}]
 
 impl Restorable for DomainList {
     fn restore_table(&self, conn: Connection) -> Result<i32, Box<dyn Error>> {
@@ -214,7 +215,7 @@ struct Ad {
     pub address: String,
     pub enabled: i32,
     pub date_added: i64,
-    pub comment: String,
+    pub comment: Option<String>,
 }
 
 impl Restorable for AdList {
@@ -350,7 +351,7 @@ struct Client {
     pub id: i32,
     pub ip: String,
     pub date_added: i64,
-    pub comment: String,
+    pub comment: Option<String>,
 }
 
 impl Restorable for ClientList {
