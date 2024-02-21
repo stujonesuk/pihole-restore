@@ -10,7 +10,7 @@ $(BINARY):
 build-armv8:
 	# add linker config
 	echo "[target.aarch64-unknown-linux-gnu]" > /usr/local/cargo/config
-	echo "linker = \"gcc-aarch64-linux-gnu\"" >> /usr/local/cargo/config
+	echo "linker = \"aarch64-linux-gnu-gcc\"" >> /usr/local/cargo/config
 	cat /usr/local/cargo/config
 	# add architecture
 	dpkg --add-architecture arm64
