@@ -170,7 +170,6 @@ struct Domain {
     pub date_added: i64,
     pub comment: Option<String>,
 }
-[{"id":9,"type":2,"domain":"(\\.|^)split\\.io$","enabled":1,"date_added":1707129864,"date_modified":1707129864,"comment":null}]
 
 impl Restorable for DomainList {
     fn restore_table(&self, conn: Connection) -> Result<i32, Box<dyn Error>> {
