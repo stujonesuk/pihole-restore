@@ -1,5 +1,5 @@
 use flate2::read::GzDecoder;
-use log::{debug, warn};
+use log::{debug, warn, info};
 use rusqlite::{named_params, params, Connection};
 use serde::Deserialize;
 use std::error::Error;
@@ -31,7 +31,7 @@ pub fn restore_domainlist(
 
     let mut s = String::new();
     file.read_to_string(&mut s).unwrap();
-
+    info!("File content: {}", &s);
     let records: Vec<Domain> = serde_json::from_str(&s).unwrap();
     let record_list: DomainList = DomainList {
         list: records,
