@@ -10,13 +10,13 @@ $(BINARY):
 build-armv8:
 	# add linker config
 	echo "[target.aarch64-unknown-linux-gnu]" > /usr/local/cargo/config
-	echo "linker = \"aarch64-linux-gnu-gcc\"" >> /usr/local/cargo/config
+	echo "linker = \"gcc-aarch64-linux-gnu\"" >> /usr/local/cargo/config
 	cat /usr/local/cargo/config
 	# add architecture
 	dpkg --add-architecture arm64
 	apt-get update
 	apt-get install -y curl git build-essential
-	apt-get install -y libc6-arm64-cross libc6-dev-arm64-cross aarch64-linux-gnu-gcc
+	apt-get install -y libc6-arm64-cross libc6-dev-arm64-cross gcc-aarch64-linux-gnu
 	# we use sqlite
 	apt-get install -y libsqlite3-0:arm64 libsqlite3-dev:arm64
 	rustup default stable
